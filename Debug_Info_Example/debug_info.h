@@ -16,7 +16,6 @@ static void debug_to_file(...) {
 	DWORD result = 0;
 	//Копирование строки в буфер
 	unsigned int size_string = strlen(debug_info) + 1;
-	debug_info[size_string] = '\0';
 			
 	//Запись строки в файл, если файл уже создан, то будет дописываться в конец файла новые строки.
 	HANDLE hFile = CreateFile(NAME_LOG, GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -27,4 +26,4 @@ static void debug_to_file(...) {
 	CloseHandle(hFile);
 }
 
-#define DEBUG_TO_FILE(...) snprintf(debug_info, DEBUG_INFO_SIZE - 1, __VA_ARGS__);   debug_to_file(__VA_ARGS__);
+#define DEBUG_TO_FILE(...) snprintf(debug_info, DEBUG_INFO_SIZE - 2, __VA_ARGS__);   debug_to_file(__VA_ARGS__);
